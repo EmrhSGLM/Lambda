@@ -1,11 +1,9 @@
 package _Lambda_;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 public class C02_giris {
+
 
     public static void main(String[] args) {
 
@@ -23,10 +21,18 @@ public class C02_giris {
         enKucukEleman2(list);
         enKucukEleman3(list);
         enKucukEleman4(list);
+        System.out.println(" ********** ");
+        onBesBuyukEnKucukTekSayi(list);
+        onBesBuyukEnKucuk1(list);
+        System.out.println(" ********** ");
+        ciftElemanKareKucuktenBuyuge(list);
+        System.out.println(" ********** ");
+        tekElemanlarininBuykKucuk(list);
 
     }
 
     // List'in cift olan elemanlarin karelerini aliniz ve en buyugunu yazdiriniz
+
 
     public static void ciftKare(List<Integer> list) {
         Optional<Integer> maxEl = list.stream().filter(C01_giris::ciftBul).map(t -> t * t).reduce(Integer::max);
@@ -114,5 +120,40 @@ public class C02_giris {
         return x<y ? x:y; // ternary
     }
 
+    // List'teki 15'ten buyuk en kucuk tek sayiyi yazdiriniz
+
+    public static void onBesBuyukEnKucukTekSayi(List<Integer> list) {
+        Optional<Integer> sayi = list.
+                stream(). // Akisa girdi
+                filter(t -> t > 15 && t%2==1). // tek ve 15 den buyuk sarti
+                sorted(). // sarti saglayan degerlerde siralama yapar
+                findFirst(); // yapilan siralamada ilk degeri verir
+        System.out.println("Onbes'ten Buyuk En Kucuk 1 => "+sayi);
+    }
+   public static void onBesBuyukEnKucuk1(List<Integer> list) {
+       System.out.println("Onbes'ten Buyuk En Kucuk 2 => "+list.stream().filter(t -> t > 15 && t % 2 == 1).reduce(Integer::min));
+   }
+    // List'in cift elemanlarini karelerini  kucukten buyuge yazdiriniz
+    public static void ciftElemanKareKucuktenBuyuge(List<Integer> list) {
+        System.out.print("Cift Elemanlarin Karelerinin Kucukten Buyuge Sirasi ==> ");
+        list.
+                stream().
+                filter(t-> t%2==0).
+                map(t ->t*t).
+                sorted().
+                forEach(t-> System.out.print(t+" "));
+        //list.stream().filter(t-> t%2==0).map(t ->t*t).sorted().forEach(C01_giris::printEl);
+    }
+
+    // List'in tek elemanlarini karelerini  buyukten kucuge yazdiriniz
+    public static void tekElemanlarininBuykKucuk(List<Integer> list) {
+        System.out.print("Tek Elemanlarin Karelerinin Buyukten Kucuge Sirasi ==> ");
+        list.
+                stream().
+                filter(t -> t%2==1).
+                map(t ->t*t).
+                sorted(Comparator.reverseOrder()).// akisa giren elemanlar ters siralanir
+                forEach(C01_giris::printEl);
+    }
 
 }
