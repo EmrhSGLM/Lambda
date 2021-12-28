@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Stream;
 
 public class C03_Lambda {
 
@@ -27,7 +28,10 @@ public class C03_Lambda {
         System.out.println("\n*****************************");
         xBitmeKontrol(names);
         System.out.println("\n*****************************");
-        karakterSAyisiEnBuyuk(names);
+        karakterSayisiEnBuyuk(names);
+        karakterSayisiEnBuyuk2(names);
+        System.out.println("\n*****************************");
+        sonHarfeGoreSiralaIlkElemanHaricSirala(names);
 
 
     }
@@ -125,15 +129,33 @@ public class C03_Lambda {
     }
 
     // Karakter sayisi en buyuk elemani yazdiriniz
-    public static void karakterSAyisiEnBuyuk(List<String> names) {
+    public static void karakterSayisiEnBuyuk(List<String> names) {
         System.out.println(names.
                 stream(). // akisa girdi
                 sorted(Comparator.comparing(t -> t.toString().length()).// Karakter uzunluguna gore siraladi
                         reversed()). // buyukten kucuge dogru siralama yapti
                 findFirst()); // ilk elemani aldi
+
     }
 
+    public static void karakterSayisiEnBuyuk2(List<String> names) {
+        Stream<String> sonIsim = names.
+                stream(). // akisa girdi
+                        sorted(Comparator.comparing(t -> t.toString().length()).// Karakter uzunluguna gore siraladi
+                        reversed()). // buyukten kucuge dogru siralama yapti
+                //  findFirst()); // ilk elemani aldi
+                        limit(1); // limit(a) ==> akisdan cikan elemanlari a parametresine gore ilk a elemani alir
+        System.out.println(Arrays.toString(sonIsim.toArray()));
+    }
 
+    // List elemanlarini son harfine gore siralayip ilk eleman haric kalan elemanlari yazdiriniz
 
+    public static void sonHarfeGoreSiralaIlkElemanHaricSirala(List<String> names) {
+        names.
+                stream().
+                sorted(Comparator.comparing(t->t.toString().charAt(t.toString().length()-1))).
+                skip(1). // Akisdan cikan elemanlarin 1. parametreyi atlar
+                forEach(System.out::println); // forEach(t->System.out.println(t+" "));
+    }
 
 }
