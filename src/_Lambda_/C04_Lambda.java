@@ -31,6 +31,15 @@ public class C04_Lambda {
         System.out.println("task 07 (2. Method) -> " + batchOrt95BuyukOgrcSayisiToplam2(list));
         System.out.println(" ********************** ");
         System.out.println("task 08 -> " + ogrcSayisi130BykBatchOrt(list));
+        System.out.println(" ********************** ");
+        System.out.println("task 09 -> " +gunduzBatchSayis(list));
+        System.out.println(" ********************** ");
+        System.out.println("task 10 -> " +OgrcSayisi130BuyukBatchOrtEnByk(list));
+        System.out.println("task 10 -> Haluk Hoca -> " +OgrcSayisi130BuyukBatchOrtEnByk1(list));
+        System.out.println(" ********************** ");
+        System.out.println("task 11 -> " +ogrcSayisi150KckEnKckBatchOrt(list));
+        System.out.println("task 11 -> Hlk -> " +ogrcSayisi150KckEnKckBatchOrt1(list));
+        System.out.println("task 11 -> Islm -> " + ogrSayisi150danAzEnKckbatchOrt(list));
 
     }
 
@@ -115,5 +124,47 @@ public class C04_Lambda {
 
     }
 
+    //task 09-->gunduz batch'lerinin sayisini  yazdiriniz.
+    public static long gunduzBatchSayis(List<TechPro> list) {
+       return  list.
+                stream().
+                filter(t -> t.getBatchName().contains("gunduz")).
+                count();
+    }
+
+    //task 10-->Ogrenci sayilari 130'dan fazla olan batch'lerin en buyuk batch ort'unu bulunuz
+    public static Optional<Integer> OgrcSayisi130BuyukBatchOrtEnByk(List<TechPro> list) {
+        return list.
+                stream().
+                filter(t->t.getOgrcSayisi() > 130).
+                map(t->t.getBatchOrt()).reduce(Integer::max);
+    }
+    public static OptionalInt OgrcSayisi130BuyukBatchOrtEnByk1(List<TechPro> list) {
+        return list.
+                stream().
+                filter(t->t.getOgrcSayisi() > 130).
+                mapToInt(t->t.getBatchOrt()).max();
+    }
+
+    //task 11-->Ogrenci sayilari 150'dan az olan batch'lerin en kucuk batch ort'unu bulunuz.
+    public static Optional<Integer> ogrcSayisi150KckEnKckBatchOrt(List<TechPro> list) {
+       return list.
+                stream().
+                filter(t->t.getOgrcSayisi() < 150).
+                map(t->t.getBatchOrt()).reduce(Integer::min);
+    }
+    public static OptionalInt ogrcSayisi150KckEnKckBatchOrt1(List<TechPro> list) {
+        return list.
+                stream().
+                filter(t->t.getOgrcSayisi() < 150).
+                mapToInt(t->t.getBatchOrt()).min();
+    }
+    public static int ogrSayisi150danAzEnKckbatchOrt(List<TechPro>list) {
+        return list.stream().
+                filter(t -> t.getOgrcSayisi() < 150).
+                mapToInt(t -> t.getBatchOrt()).
+                min().
+                getAsInt(); // getAsInt() -> ciktiyi int olarak return eder
+    }
 
 }

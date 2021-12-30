@@ -18,6 +18,10 @@ public class TechPro {
       this.ogrcSayisi = ogrcSayisi;
    }
 
+   public String getBatchName() {   return batchName;   }
+
+   public void setBatchName(String batchName) {   this.batchName = batchName;  }
+
    public int getOgrcSayisi() {return ogrcSayisi;  }
 
    public void setOgrcSayisi(int ogrcSayisi) {this.ogrcSayisi = ogrcSayisi;  }
@@ -39,4 +43,6 @@ public class TechPro {
               ", ogrcSayisi='" + ogrcSayisi + '\'' +
               '}';
    }
+
+
 }
