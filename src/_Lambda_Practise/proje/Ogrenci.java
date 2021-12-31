@@ -21,16 +21,7 @@ public class Ogrenci {
     private double diplomaNotu;
     private String cinsiyet;
 
-    @Override
-    public String toString() {
-        return "Ogrenci{" +
-                "ad='" + ad + '\'' +
-                ", SoyAd='" + SoyAd + '\'' +
-                ", yas=" + yas +
-                ", diplomaNotu=" + diplomaNotu +
-                ", cinsiyet='" + cinsiyet + '\'' +
-                '}';
-    }
+
 
     public Ogrenci(String ad, String soyAd, int yas, double diplomaNotu, String cinsiyet) {
         this.ad = ad;
